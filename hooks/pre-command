@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+if [ ${BUILDKITE_PLUGIN_BUILDKITE_TAG_RELEASE_RELEASE_COMPLETE} != 'true' ]
+then
+    lib/tag-release.sh ${BUILDKITE_PLUGIN_BUILDKITE_TAG_RELEASE_PENDING_TAG_NAME}
+fi

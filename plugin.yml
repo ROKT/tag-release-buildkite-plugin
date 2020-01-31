@@ -1,0 +1,18 @@
+name: "tag-release"
+description: Tag commits with release tag when deploying
+author: james.bebbington@rokt.com
+public: true
+requirements:
+  - bash
+  - git
+configuration:
+  properties:
+    pending_tag_name:
+      type: string
+    current_tag_name:
+      type: string
+    previous_tag_name:
+      type: string
+    release_complete:
+      type: boolean # Should we mark the commit as current or pending
+  additionalProperties: false
