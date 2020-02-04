@@ -17,7 +17,7 @@ env=${step_key_array[1]}
 region=${step_key_array[2]}
 if [ ! -z "$TAG_IDENTIFIER" ]; then separator="-"; else separator=""; fi
 identifier="$separator${4:-}"
-tag_postfix = "$env-$region$identifier"
+tag_postfix="$env-$region$identifier"
 
 echo "--- :git: tagging release."
 
