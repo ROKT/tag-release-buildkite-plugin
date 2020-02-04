@@ -7,14 +7,13 @@ REPLACE_TAGNAME=${3:-}
 
 IFS=':' read -ra step_key_array <<< "${BUILDKITE_STEP_KEY}"
 
-if [ ${#step_key_array[@]} < 4 ]
+if [ ${#step_key_array[@]} -lt 4 ]
 then
     echo -e "\e[33mStep Key not in correct format to determine tag name. Expected format is deployment:{env}:{region}:{name}\e[0m"
 fi
 
 env=${step_key_array[1]}
 region=${step_key_array[2]}
-name=$1
 
 echo "--- :git: tagging release."
 
