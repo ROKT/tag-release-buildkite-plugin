@@ -8,6 +8,8 @@ This plugin records the environment and region as part of the tag name. These ar
 
 ## Example
 
+Set `mark_pending` to true to set the "Pending" tag in a pre-command hook before the deployment starts. Set `mark_completed` to true to set the "Current" & "Previous" tags as a post-command hook after the deployment has succeeded. At least one of these parameters should be true, and it's valid for them both to be true if your deployment only includes one step.
+
 Recommended Usage:
 
 ```yml
