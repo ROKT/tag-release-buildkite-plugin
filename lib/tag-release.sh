@@ -36,8 +36,5 @@ fi
 TAG_MESSAGE="{\"BUILDKITE_JOB_ID\"=${BUILDKITE_JOB_ID},\"BUILDKITE_BUILD_NUMBER\"=\"${BUILDKITE_BUILD_NUMBER}\",\"BUILDKITE_BUILD_URL\"=\"${BUILDKITE_BUILD_URL}\", }"
 git tag -fa "$CURRENT_TAG_NAME-$env-$region" -m "${TAG_MESSAGE}"
 
-# Show the tags
-git --no-pager tag
-
 # Push the new tag
 git push origin refs/tags/"$CURRENT_TAG_NAME-$env-$region"
