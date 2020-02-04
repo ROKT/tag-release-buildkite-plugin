@@ -16,7 +16,7 @@ env=${step_key_array[1]}
 region=${step_key_array[2]}
 name={$1:-${step_key_array[3]}}
 
-echo "--- :git: tagging release"
+echo "--- :git: tagging release."
 
 git config user.email "buildkite@rokt.com"
 git config user.name "Buildkite"
