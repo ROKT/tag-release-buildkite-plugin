@@ -5,7 +5,7 @@ CURRENT_TAG_NAME=$1
 REMOVE_TAG_NAME={$2:-}
 REPLACE_TAGNAME={$3:-}
 
-IFS=';' read -ra step_key_array <<< "${BUILDKITE_STEP_KEY}"
+readarray -td ':' a < <(printf '%s' "${BUILDKITE_STEP_KEY}"); declare -p step_key_array
 
 if [ ${#step_key_array[@]} <= 3 ]
 then
