@@ -16,12 +16,32 @@ steps:
     key: "deployment:${ENVIRONMENT}:${REGION}:tag-commit-pending"
     plugins:
     - ssh://git@bitbucket.org/ROKT/buildkite-tag-release.git#v1.0.0:
-      release_complete: false
+        mark_pending: true
 
   ...
 
   - label: ":cloud: Tag commit as completed"
     key: "deployment:${ENVIRONMENT}:${REGION}:tag-commit-completed"
     - ssh://git@bitbucket.org/ROKT/buildkite-tag-release.git#v1.0.0:
-      release_complete: true
+        mark_completed: true
+```
+
+If you want to have release tags for different services deployed from the same repo, you can provide a tag_identifier to differentiate these. You can use multiple of these in the same build plan if desired.
+
+```yml
+steps:
+  - label: ":cloud: Tag commit as pending"
+    key: "deployment:${ENVIRONMENT}:${REGION}:tag-commit-pending"
+    plugins:
+    - ssh://git@bitbucket.org/ROKT/buildkite-tag-release.git#v1.0.0:
+        mark_pending: true
+        tag_identifier: service-name
+
+  ...
+
+  - label: ":cloud: Tag commit as completed"
+    key: "deployment:${ENVIRONMENT}:${REGION}:tag-commit-completed"
+    - ssh://git@bitbucket.org/ROKT/buildkite-tag-release.git#v1.0.0:
+        mark_completed: true
+        tag_identifier: service-name
 ```

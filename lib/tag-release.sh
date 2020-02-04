@@ -4,6 +4,7 @@ set -euo pipefail
 CURRENT_TAG_NAME=$1
 REMOVE_TAG_NAME=${2:-}
 REPLACE_TAGNAME=${3:-}
+TAG_IDENTIFIER=${4:-}
 
 IFS=':' read -ra step_key_array <<< "${BUILDKITE_STEP_KEY}"
 
@@ -14,6 +15,9 @@ fi
 
 env=${step_key_array[1]}
 region=${step_key_array[2]}
+if [ ! -z "$TAG_IDENTIFIER" ]; then separator="-"; else separator=""; fi
+identifier="$separator${4:-}"
+postfix = $env-$region$identifier
 
 echo "--- :git: tagging release."
 
@@ -21,23 +25,20 @@ git config user.email "buildkite@rokt.com"
 git config user.name "Buildkite"
 
 # Delete any tags with name 'REMOVE_TAG_NAME' (might not exist)
-if [ "$REMOVE_TAG_NAME" != "" ]; then git push origin :refs/tags/"$REMOVE_TAG_NAME-$env-$region" || true; fi
+if [ "$REMOVE_TAG_NAME" != "" ]; then git push origin :refs/tags/"$REMOVE_TAG_NAME-$postfix" || true; fi
 
 if [ "$REPLACE_TAGNAME" != "" ];
 then
     # Replace any tags with name 'CURRENT_TAG_NAME' with 'REPLACE_TAGNAME' (might not exist)
-    git push origin refs/tags/"$CURRENT_TAG_NAME-$env-$region":refs/tags/"$REPLACE_TAGNAME-$env-$region" :refs/tags/"$CURRENT_TAG_NAME-$env-$region" || true
+    git push origin refs/tags/"$CURRENT_TAG_NAME-$postfix":refs/tags/"$REPLACE_TAGNAME-$postfix" :refs/tags/"$CURRENT_TAG_NAME-$postfix" || true
 else
     # Otherwise, delete any existing tags with name 'CURRENT_TAG_NAME' (might not exist)
-    git push origin :refs/tags/"$CURRENT_TAG_NAME-$env-$region" || true
+    git push origin :refs/tags/"$CURRENT_TAG_NAME-$postfix" || true
 fi
 
 # Create new local tag with name 'CURRENT_TAG_NAME'
 TAG_MESSAGE="{\"BUILDKITE_JOB_ID\"=${BUILDKITE_JOB_ID},\"BUILDKITE_BUILD_NUMBER\"=\"${BUILDKITE_BUILD_NUMBER}\",\"BUILDKITE_BUILD_URL\"=\"${BUILDKITE_BUILD_URL}\", }"
-git tag -fa "$CURRENT_TAG_NAME-$env-$region" -m "${TAG_MESSAGE}"
-
-# Show the tags
-git --no-pager tag
+git tag -fa "$CURRENT_TAG_NAME-$postfix" -m "${TAG_MESSAGE}"
 
 # Push the new tag
-git push origin refs/tags/"$CURRENT_TAG_NAME-$env-$region"
+git push origin refs/tags/"$CURRENT_TAG_NAME-$postfix"

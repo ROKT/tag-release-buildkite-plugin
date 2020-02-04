@@ -1,4 +1,4 @@
-name: "tag-release"
+name: "tag_release"
 description: Tag commits with release tag when deploying
 author: james.bebbington@rokt.com
 public: true
@@ -7,6 +7,15 @@ requirements:
   - git
 configuration:
   properties:
-    release_complete:
-      type: boolean # Should we mark the commit as current or pending
+    mark_pending:
+      type: boolean # Should we mark the commit as pending
+    mark_completed:
+      type: boolean # Should we mark the commit as current / previous
+    tag_identifier:
+      type: string # An identifier to include in the tag to distinguish deployment of different services within the same repository
+    oneOf:
+    - required:
+      - mark_pending
+    - required:
+      - mark_completed
   additionalProperties: false
