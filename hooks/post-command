@@ -3,7 +3,7 @@ set -eo pipefail
 
 basedir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
 
-if [ "${BUILDKITE_PLUGIN_BUILDKITE_TAG_RELEASE_MARK_COMPLETED}" == "true" ]
+if [ "${BUILDKITE_PLUGIN_TAG_RELEASE_MARK_COMPLETED}" == "true" ]
 then 
-    . $basedir/lib/tag-release.sh "current" "pending" "previous" "${BUILDKITE_PLUGIN_BUILDKITE_TAG_RELEASE_TAG_IDENTIFIER}"
+    . $basedir/lib/tag-release.sh "current" "pending" "previous" "${BUILDKITE_PLUGIN_TAG_RELEASE_TAG_IDENTIFIER}"
 fi
