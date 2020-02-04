@@ -2,19 +2,19 @@
 set -euo pipefail
 
 CURRENT_TAG_NAME=$1
-REMOVE_TAG_NAME={$2:-}
-REPLACE_TAGNAME={$3:-}
+REMOVE_TAG_NAME=${2:-}
+REPLACE_TAGNAME=${3:-}
 
-readarray -td ':' a < <(printf '%s' "${BUILDKITE_STEP_KEY}"); declare -p step_key_array
+readarray -td ':' step_key_array < <(printf '%s' "${BUILDKITE_STEP_KEY}"); declare -p step_key_array
 
-if [ ${#step_key_array[@]} <= 3 ]
+if [ ${#step_key_array[@]} < 4 ]
 then
     echo -e "\e[33mStep Key not in correct format to determine tag name. Expected format is deployment:{env}:{region}:{name}\e[0m"
 fi
 
 env=${step_key_array[1]}
 region=${step_key_array[2]}
-name={$1:-${step_key_array[3]}}
+name=$1
 
 echo "--- :git: tagging release."
 
