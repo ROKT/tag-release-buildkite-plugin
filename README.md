@@ -12,9 +12,15 @@ Set `mark_pending` to true to set the "pending" tag in a pre-command hook before
 
 If you want to have release tags for different services deployed from the same repo, in the same or different build plans, you can provide a `tag_identifier`, that will be included in the tag name, to differentiate these.
 
+Note the full tag name will be in the format `deployment[/{tag_identifier}]/{env}/{region}/(pending|current|previous)`.
+
 #### Single Step Deployment:
 
 ```yml
+env:
+  ENVIRONMENT: prod
+  REGION: us-west-2
+
 steps:
   - label: "Single Deployment Step"
     key: "deployment:${ENVIRONMENT}:${REGION}:single-deployment-step"
@@ -27,6 +33,10 @@ steps:
 #### Multi Step Deployment:
 
 ```yml
+env:
+  ENVIRONMENT: prod
+  REGION: us-west-2
+
 steps:
   - label: "First Deployment Step"
     key: "deployment:${ENVIRONMENT}:${REGION}:first-deployment-step"
@@ -43,6 +53,10 @@ steps:
 #### Deployment of Multiple Services:
 
 ```yml
+env:
+  ENVIRONMENT: prod
+  REGION: us-west-2
+
 steps:
   - label: "Deploy Service One"
     key: "deployment:${ENVIRONMENT}:${REGION}:deploy-service-one"
