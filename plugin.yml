@@ -1,4 +1,4 @@
-name: "tag_release"
+name: "buildkite_tag_release"
 description: Tag commits with release tag when deploying
 author: james.bebbington@rokt.com
 public: true
