@@ -1,0 +1,20 @@
+name: "buildkite_tag_release"
+description: Tag commits with release tag when deploying
+public: true
+requirements:
+  - bash
+  - git
+configuration:
+  properties:
+    mark_pending:
+      type: boolean # Should we mark the commit as pending
+    mark_completed:
+      type: boolean # Should we mark the commit as current / previous
+    tag_identifier:
+      type: string # An identifier to include in the tag to distinguish deployment of different services within the same repository
+    oneOf:
+    - required:
+      - mark_pending
+    - required:
+      - mark_completed
+  additionalProperties: false
