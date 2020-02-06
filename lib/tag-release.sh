@@ -30,10 +30,12 @@ if [ "$REMOVE_TAG_NAME" != "" ]; then git push origin :refs/tags/"$tag_prefix/$R
 
 if [ "$REPLACE_TAGNAME" != "" ];
 then
-    # Replace any tags with name 'CURRENT_TAG_NAME' with 'REPLACE_TAGNAME' (might not exist)
+    # Delete any existing tags with name 'REPLACE_TAGNAME' (might not exist)
+    git push origin :refs/tags/"$tag_prefix/$REPLACE_TAGNAME" || true
+    # Then replace any tags with name 'CURRENT_TAG_NAME' with 'REPLACE_TAGNAME' (might not exist)
     git push origin refs/tags/"$tag_prefix/$CURRENT_TAG_NAME":refs/tags/"$tag_prefix/$REPLACE_TAGNAME" :refs/tags/"$tag_prefix/$CURRENT_TAG_NAME" || true
 else
-    # Otherwise, delete any existing tags with name 'CURRENT_TAG_NAME' (might not exist)
+    # Otherwise, just delete any existing tags with name 'CURRENT_TAG_NAME' (might not exist)
     git push origin :refs/tags/"$tag_prefix/$CURRENT_TAG_NAME" || true
 fi
 
