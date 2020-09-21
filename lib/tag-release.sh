@@ -10,13 +10,13 @@ IFS=':' read -ra step_key_array <<< "${BUILDKITE_STEP_KEY}"
 
 if [ ${#step_key_array[@]} -lt 4 ]
 then
-    echo -e "\e[33mStep Key not in correct format to determine tag name. Expected format is deployment:{env}:{region}:{name}\e[0m"
-    exit 0
+  echo -e "\e[33mStep Key not in correct format to determine tag name. Expected format is deployment:{env}:{region}:{name}\e[0m"
+  exit 0
 fi
 
 env=${step_key_array[1]}
 region=${step_key_array[2]}
-if [ ! -z "$TAG_IDENTIFIER" ]; then separator="/"; else separator=""; fi
+if [ -n "$TAG_IDENTIFIER" ]; then separator="/"; else separator=""; fi
 identifier="${4:-}$separator"
 tag_prefix="deployment$identifier/$env/$region"
 
@@ -30,13 +30,13 @@ if [ "$REMOVE_TAG_NAME" != "" ]; then git push origin :refs/tags/"$tag_prefix/$R
 
 if [ "$REPLACE_TAGNAME" != "" ];
 then
-    # Delete any existing tags with name 'REPLACE_TAGNAME' (might not exist)
-    git push origin :refs/tags/"$tag_prefix/$REPLACE_TAGNAME" || true
-    # Then replace any tags with name 'CURRENT_TAG_NAME' with 'REPLACE_TAGNAME' (might not exist)
-    git push origin refs/tags/"$tag_prefix/$CURRENT_TAG_NAME":refs/tags/"$tag_prefix/$REPLACE_TAGNAME" :refs/tags/"$tag_prefix/$CURRENT_TAG_NAME" || true
+  # Delete any existing tags with name 'REPLACE_TAGNAME' (might not exist)
+  git push origin :refs/tags/"$tag_prefix/$REPLACE_TAGNAME" || true
+  # Then replace any tags with name 'CURRENT_TAG_NAME' with 'REPLACE_TAGNAME' (might not exist)
+  git push origin refs/tags/"$tag_prefix/$CURRENT_TAG_NAME":refs/tags/"$tag_prefix/$REPLACE_TAGNAME" :refs/tags/"$tag_prefix/$CURRENT_TAG_NAME" || true
 else
-    # Otherwise, just delete any existing tags with name 'CURRENT_TAG_NAME' (might not exist)
-    git push origin :refs/tags/"$tag_prefix/$CURRENT_TAG_NAME" || true
+  # Otherwise, just delete any existing tags with name 'CURRENT_TAG_NAME' (might not exist)
+  git push origin :refs/tags/"$tag_prefix/$CURRENT_TAG_NAME" || true
 fi
 
 # Create new local tag with name 'CURRENT_TAG_NAME'

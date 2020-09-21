@@ -5,5 +5,5 @@ basedir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
 
 if [ "${BUILDKITE_PLUGIN_BUILDKITE_TAG_RELEASE_MARK_PENDING}" == "true" ]
 then
-    . $basedir/lib/tag-release.sh "pending" "" "" "${BUILDKITE_PLUGIN_BUILDKITE_TAG_RELEASE_TAG_IDENTIFIER}"
+  $basedir/lib/tag-release.sh "pending" "" "" "${BUILDKITE_PLUGIN_BUILDKITE_TAG_RELEASE_TAG_IDENTIFIER}"
 fi
