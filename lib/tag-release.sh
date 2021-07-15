@@ -17,7 +17,7 @@ fi
 env=${step_key_array[1]}
 region=${step_key_array[2]}
 if [ -n "$TAG_IDENTIFIER" ]; then separator="/"; else separator=""; fi
-identifier="${4:-}$separator"
+identifier="$separator${4:-}"
 tag_prefix="deployment$identifier/$env/$region"
 
 echo "--- :git: tagging release."
