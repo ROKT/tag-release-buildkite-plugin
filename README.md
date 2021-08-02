@@ -25,7 +25,7 @@ steps:
   - label: "Single Deployment Step"
     key: "deployment:${ENVIRONMENT}:${REGION}:single-deployment-step"
     plugins:
-    - ssh://git@bitbucket.org/ROKT/buildkite-tag-release#v1.0.0:
+    - rokt/tag-releas#v1.0.0:
         mark_pending: true
         mark_completed: true
 ```
@@ -41,12 +41,12 @@ steps:
   - label: "First Deployment Step"
     key: "deployment:${ENVIRONMENT}:${REGION}:first-deployment-step"
     plugins:
-    - ssh://git@bitbucket.org/ROKT/buildkite-tag-release#v1.0.0:
+    - rokt/tag-release#v1.0.0:
         mark_pending: true
 
   - label: "Final Deployment Step"
     key: "deployment:${ENVIRONMENT}:${REGION}:last-deployment-step"
-    - ssh://git@bitbucket.org/ROKT/buildkite-tag-release#v1.0.0:
+    - rokt/tag-releas#v1.0.0:
         mark_completed: true
 ```
 
@@ -61,7 +61,7 @@ steps:
   - label: "Deploy Service One"
     key: "deployment:${ENVIRONMENT}:${REGION}:deploy-service-one"
     plugins:
-    - ssh://git@bitbucket.org/ROKT/buildkite-tag-release#v1.0.0:
+    - rokt/tag-releas#v1.0.0:
         mark_pending: true
         mark_completed: true
         tag_identifier: service-one
@@ -69,13 +69,13 @@ steps:
   - label: "Begin Deployment of Service Two"
     key: "deployment:${ENVIRONMENT}:${REGION}:begin-deploy-service-two"
     plugins:
-    - ssh://git@bitbucket.org/ROKT/buildkite-tag-release#v1.0.0:
+    - rokt/tag-releas#v1.0.0:
         mark_pending: true
         tag_identifier: service-two
 
   - label: "Complete Deployment of Service Two"
     key: "deployment:${ENVIRONMENT}:${REGION}:complete-deployment-service-two"
-    - ssh://git@bitbucket.org/ROKT/buildkite-tag-release#v1.0.0:
+    - rokt/tag-releas#v1.0.0:
         mark_completed: true
         tag_identifier: service-two
 ```
