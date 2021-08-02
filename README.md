@@ -61,7 +61,7 @@ steps:
   - label: "Deploy Service One"
     key: "deployment:${ENVIRONMENT}:${REGION}:deploy-service-one"
     plugins:
-    - rokt/tag-releas#v1.0.0:
+    - rokt/tag-release#v1.0.0:
         mark_pending: true
         mark_completed: true
         tag_identifier: service-one
