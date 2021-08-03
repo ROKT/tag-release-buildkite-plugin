@@ -1,4 +1,4 @@
-name: "buildkite_tag_release"
+name: "Tag Release"
 description: Tag commits with release tag when deploying
 public: true
 requirements:
