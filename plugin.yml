@@ -1,5 +1,6 @@
-name: "buildkite_tag_release"
+name: Tag Release
 description: Tag commits with release tag when deploying
+author: https://github.com/ROKT
 public: true
 requirements:
   - bash
@@ -12,9 +13,9 @@ configuration:
       type: boolean # Should we mark the commit as current / previous
     tag_identifier:
       type: string # An identifier to include in the tag to distinguish deployment of different services within the same repository
-    oneOf:
-    - required:
-      - mark_pending
-    - required:
-      - mark_completed
+  oneOf:
+  - required:
+    - mark_pending
+  - required:
+    - mark_completed
   additionalProperties: false
