@@ -22,8 +22,11 @@ tag_prefix="deployment$identifier/$env/$region"
 
 echo "--- :git: tagging release."
 
-git config user.email "buildkite@rokt.com"
-git config user.name "Buildkite"
+# git config user.email "buildkite@rokt.com"
+# git config user.name "Buildkite"
+
+git config user.email "${BUILDKITE_BUILD_AUTHOR_EMAIL:-$BUILDKITE_BUILD_CREATOR_EMAIL}"
+git config user.name "${BUILDKITE_BUILD_AUTHOR:-$BUILDKITE_BUILD_CREATOR}"
 
 # Delete any tags with name 'REMOVE_TAG_NAME' (might not exist)
 if [ "$REMOVE_TAG_NAME" != "" ]; then git push origin :refs/tags/"$tag_prefix/$REMOVE_TAG_NAME" || true; fi
