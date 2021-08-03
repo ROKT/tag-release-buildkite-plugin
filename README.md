@@ -26,6 +26,7 @@ steps:
     key: "deployment:${ENVIRONMENT}:${REGION}:single-deployment-step"
     plugins:
     - ROKT/tag-release#v1.0.3-beta:
+        mark_pending: true
         mark_completed: true
 ```
 
@@ -63,6 +64,7 @@ steps:
     plugins:
     - ROKT/tag-release#v1.0.3-beta:
         mark_pending: true
+        mark_completed: true
         tag_identifier: service-one
 
   - label: "Begin Deployment of Service Two"
