@@ -25,7 +25,8 @@ steps:
   - label: "Single Deployment Step"
     key: "deployment:${ENVIRONMENT}:${REGION}:single-deployment-step"
     plugins:
-    - ROKT/tag-release#v1.0.3-beta:
+    - ROKT/tag-release#v1.1.0:
+        mark_pending: true
         mark_completed: true
 ```
 
@@ -40,13 +41,13 @@ steps:
   - label: "First Deployment Step"
     key: "deployment:${ENVIRONMENT}:${REGION}:first-deployment-step"
     plugins:
-    - ROKT/tag-release#v1.0.3-beta:
+    - ROKT/tag-release#v1.1.0:
         mark_pending: true
 
   - label: "Final Deployment Step"
     key: "deployment:${ENVIRONMENT}:${REGION}:last-deployment-step"
     plugins:
-    - ROKT/tag-release#v1.0.3-beta:
+    - ROKT/tag-release#v1.1.0:
         mark_completed: true
 ```
 
@@ -61,21 +62,22 @@ steps:
   - label: "Deploy Service One"
     key: "deployment:${ENVIRONMENT}:${REGION}:deploy-service-one"
     plugins:
-    - ROKT/tag-release#v1.0.3-beta:
+    - ROKT/tag-release#v1.1.0:
         mark_pending: true
+        mark_completed: true
         tag_identifier: service-one
 
   - label: "Begin Deployment of Service Two"
     key: "deployment:${ENVIRONMENT}:${REGION}:begin-deploy-service-two"
     plugins:
-    - ROKT/tag-release#v1.0.3-beta:
+    - ROKT/tag-release#v1.1.0:
         mark_pending: true
         tag_identifier: service-two
 
   - label: "Complete Deployment of Service Two"
     key: "deployment:${ENVIRONMENT}:${REGION}:complete-deployment-service-two"
     plugins:
-    - ROKT/tag-release#v1.0.3-beta:
+    - ROKT/tag-release#v1.1.0:
         mark_completed: true
         tag_identifier: service-two
 ```
