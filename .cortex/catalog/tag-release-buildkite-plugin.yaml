@@ -1,21 +1,22 @@
 openapi: 3.0.0
 info:
-  title: "Tag Release Buildkite Plugin"
-  x-cortex-tag: "tag-release-buildkite-plugin"
+  title: Tag Release Buildkite Plugin
+  x-cortex-tag: tag-release-buildkite-plugin
   x-cortex-type: infra
-  description: |
-    A [Buildkite plugin](https://buildkite.com/docs/agent/v3/plugins) for tagging the release commit.
+  description: 'A [Buildkite plugin](https://buildkite.com/docs/agent/v3/plugins)
+    for tagging the release commit.
+
+    '
   x-cortex-git:
     github:
-      repository: "ROKT/tag-release-buildkite-plugin"
-      basepath: "tag-release-buildkite-plugin"
+      repository: ROKT/tag-release-buildkite-plugin
   x-cortex-owners:
-    - type: group
-      name: "rokt-global-infrastructure"
-      provider: CORTEX
+  - type: group
+    name: rokt-global-infrastructure
+    provider: CORTEX
   x-cortex-groups:
-    - "lang-shell"
+  - lang-shell
   x-cortex-oncall:
     opsgenie:
       type: SCHEDULE
-      id: "Rokt Global Infrastructure Build and Release_schedule"
+      id: Rokt Global Infrastructure Build and Release_schedule
