@@ -3,10 +3,7 @@ info:
   title: Tag Release Buildkite Plugin
   x-cortex-tag: tag-release-buildkite-plugin
   x-cortex-type: infra
-  description: 'A [Buildkite plugin](https://buildkite.com/docs/agent/v3/plugins)
-    for tagging the release commit.
-
-    '
+  description: 'A [Buildkite plugin](https://buildkite.com/docs/agent/v3/plugins) for tagging the release commit.'
   x-cortex-git:
     github:
       repository: ROKT/tag-release-buildkite-plugin
