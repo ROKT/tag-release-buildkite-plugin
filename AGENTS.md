@@ -1,3 +1,5 @@
+# AGENTS
+
 ## Trunk (code quality and security)
 
 This repo uses Trunk for security scanning and pre-commit hooks.
