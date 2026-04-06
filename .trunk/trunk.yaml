@@ -1,0 +1,20 @@
+version: 0.1
+cli:
+  version: 1.24.0
+
+plugins:
+  sources:
+    - id: trunk
+      ref: v1.7.4
+      uri: https://github.com/trunk-io/plugins
+
+lint:
+  enabled:
+    - checkov@3.2.0
+    - osv-scanner@2.0.3
+    - trufflehog@3.81.0
+
+actions:
+  enabled:
+    - trunk-check-pre-push-always
+    - trunk-check-pre-commit

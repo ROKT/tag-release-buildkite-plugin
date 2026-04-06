@@ -1,0 +1,8 @@
+# Trunk manages these as symlinks to its local cache directory.
+# They are machine-specific and must not be committed.
+actions
+logs
+notifications
+out
+plugins
+tools
