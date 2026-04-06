@@ -20,4 +20,3 @@ When reviewing PRs that touch this repo or downstream services, apply these seve
 - Redis clients without DNS TTL re-resolution
 - Submit buttons with no disabled state during async operations
 - UI navigation hiding used as sole access control (no backend auth check)
-- K8s Deployments/Services missing `service-type: internal|edge|public` label
